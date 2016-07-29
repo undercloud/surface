@@ -11,5 +11,12 @@ class Utils
 		
 		return false;
 	}
+	
+	public function retrieve(array $array, $key)
+	{
+		if (isset($array[$key])) {
+			return $array[$key];
+		}
+	}
 }
 ?>

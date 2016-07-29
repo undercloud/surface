@@ -1,0 +1,1 @@
+<?phpnamespace Surface;class Connection{	}?>

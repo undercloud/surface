@@ -4,12 +4,32 @@ namespace Surface;
 class Scope
 {
 	private $root;
+	private static $container;
 
 	public function __construct($root)
 	{
 		$this->root = $root;
+		
+		if (null == self::$container) {
+			self:$container = array(
+				'get'    => &$_GET,
+				'post'   => &$_POST,
+				'server' => &$_SERVER,
+				'cookie' => &$_COOKIE
+			);
+		}
 	}
 
+	public function with()
+	{
+		
+	}
+	
+	public function globals($key)
+	{
+		return self:$container[$key];
+	}
+	
 	public function classes()
 	{
 		return get_declared_classes();
@@ -24,7 +44,7 @@ class Scope
 			return $this->root->utils->allIs($map, true);
 		}
 	
-		return class_exists($class, false);
+		return class_exists($class);
 	}
 	
 	public function interfaces()
@@ -34,7 +54,7 @@ class Scope
 	
 	public function hasInterface($interface)
 	{
-		return interface_exists($interface, false);
+		return interface_exists($interface);
 	}
 	
 	public function traits()
@@ -44,7 +64,7 @@ class Scope
 	
 	public function hasTrait($trait)
 	{
-		return trait_exists($trait, false);
+		return trait_exists($trait);
 	}
 	
 	public function extensions()
@@ -57,14 +77,15 @@ class Scope
 		return extension_loaded($name);
 	}
 	
-	public function get()
+	public function get($key = null)
 	{
-		return $_GET;
-	}
-	
-	public function post()
-	{
-		return $_POST;
+		$get = $this->globals('get');
+		
+		if (null === $key) {
+			return $get;
+		}
+		
+		return $this->root->utils->retrieve($get, $key);
 	}
 }
 
