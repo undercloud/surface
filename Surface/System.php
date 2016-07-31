@@ -55,5 +55,12 @@ class System
         
         return (int) $load;
 	}
+
+	public function sys($msg, $priority = LOG_NOTICE)
+	{
+		if (false === syslog($msg, $priority)) {
+
+		}
+	}
 }
 ?>

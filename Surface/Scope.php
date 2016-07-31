@@ -27,7 +27,7 @@ class Scope
 	
 	public function globals($key)
 	{
-		return self:$container[$key];
+		return self::$container[$key];
 	}
 	
 	public function classes()

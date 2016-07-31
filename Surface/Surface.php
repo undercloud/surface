@@ -10,10 +10,11 @@ class Surface
 
 	public function __construct()
 	{
-		$this->config = new Config($this);
-		$this->memory = new Memory($this);
-		$this->scope  = new Scope($this);
-		$this->utils  = new Utils($this);
+		$this->config  = new Config($this);
+		$this->memory  = new Memory($this);
+		$this->scope   = new Scope($this);
+		$this->storage = new Storage;
+		$this->utils   = new Utils($this);
 	}
 }
 ?>
