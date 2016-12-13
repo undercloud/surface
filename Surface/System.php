@@ -22,6 +22,16 @@ class System
         return php_sapi_name();
     }
 
+    public function isCli()
+    {
+
+    }
+
+    public function isHttp()
+    {
+
+    }
+
     /**
      *  Get OS
      *

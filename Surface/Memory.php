@@ -61,6 +61,6 @@ class Memory
      */
     public function limit($value)
     {
-        return $this->root->config->set('memory_limit', $value);
+        return $this->root->config()->set('memory_limit', $value);
     }
 }

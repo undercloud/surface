@@ -13,22 +13,6 @@ namespace Surface;
 class Process
 {
     /**
-     * Rool helper
-     * @var Surface\Surface
-     */
-    private $root;
-
-    /**
-     * Initialize
-     *
-     * @param Surface\Surface $root instance
-     */
-    public function __construct(Surface $root)
-    {
-        $this->root = $root;
-    }
-
-    /**
      * Get user name
      *
      * @return string
@@ -97,7 +81,7 @@ class Process
     }
 
     /**
-     * Slepp
+     * Sleep
      *
      * @param int $msec milliseconds
      *
@@ -106,5 +90,16 @@ class Process
     public function sleep($msec)
     {
         usleep($msec * 1000);
+    }
+
+
+    public function started()
+    {
+        return $_SERVER['REQUEST_TIME_FLOAT'];
+    }
+
+    public function uptime()
+    {
+        return microtime(true) - $this->started();
     }
 }

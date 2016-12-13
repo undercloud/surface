@@ -151,7 +151,7 @@ class Config
     }
 
     /**
-     * Gaet list of included configs
+     * Get list of included configs
      *
      * @return array
      */

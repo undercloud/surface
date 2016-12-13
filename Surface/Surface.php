@@ -14,6 +14,8 @@ namespace Surface;
  * @method   Surface\Scope   scope()
  * @method   Surface\Storage storage()
  * @method   Surface\Utils   utils()
+ * @method   Surface\Process process()
+ * @method   Surface\Scope   scope()
  */
 class Surface
 {
