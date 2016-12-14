@@ -22,14 +22,24 @@ class System
         return php_sapi_name();
     }
 
+    /**
+     * Check is CLI mode
+     *
+     * @return boolean
+     */
     public function isCli()
     {
-
+        return 'cli' === $this->sapi();
     }
 
+    /**
+     * Check is HTTP mode
+     *
+     * @return boolean
+     */
     public function isHttp()
     {
-
+        return !$this->isCli();
     }
 
     /**
@@ -94,7 +104,7 @@ class System
      */
     public function load()
     {
-        if (stristr(PHP_OS, 'win')) {
+        if (!function_exists('sys_getloadavg') and stristr(PHP_OS, 'win')) {
             $wmi = new COM("Winmgmts://");
             $server = $wmi->execquery(
                 "SELECT LoadPercentage FROM Win32_Processor"
@@ -108,7 +118,7 @@ class System
                 $load_total += $cpu->loadpercentage;
             }
 
-            $load = round($load_total/$cpu_num);
+            $load = round($load_total / $cpu_num);
         } else {
             $sys_load = sys_getloadavg();
             $load = $sys_load[0];

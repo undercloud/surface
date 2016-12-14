@@ -71,7 +71,7 @@ class Process
      *
      * @return null
      */
-    public function timeout($sec == null)
+    public function timeout($sec = null)
     {
         if (false === set_time_limit($sec)) {
             throw new SurfaceException(
@@ -92,12 +92,21 @@ class Process
         usleep($msec * 1000);
     }
 
-
+    /**
+     * Get process start time
+     *
+     * @return float
+     */
     public function started()
     {
         return $_SERVER['REQUEST_TIME_FLOAT'];
     }
 
+    /**
+     * Get process uptime
+     *
+     * @return float
+     */
     public function uptime()
     {
         return microtime(true) - $this->started();

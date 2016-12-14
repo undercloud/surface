@@ -19,7 +19,7 @@ class Connection
      *
      * @return null
      */
-	public function ignoreAbort($mode)
+    public function ignoreAbort($mode)
     {
         ignore_user_abort($mode);
     }

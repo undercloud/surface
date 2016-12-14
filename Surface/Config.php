@@ -10,10 +10,11 @@ namespace Surface;
  * @license  https://opensource.org/licenses/MIT MIT
  * @link     http://github.com/undercloud/surface
  */
+
+use Closure;
+
 class Config
 {
-    use Closure;
-
     /**
      * Get all config settings
      *

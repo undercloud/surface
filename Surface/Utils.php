@@ -13,23 +13,6 @@ namespace Surface;
 class Utils
 {
     /**
-     * Check if all array items equals
-     *
-     * @param array $list  of items
-     * @param mixed $value for check
-     *
-     * @return bool
-     */
-    public function allIs(array $list, $value)
-    {
-        if (count(array_unique($list)) == 1) {
-            return (reset($list) === $value);
-        }
-
-        return false;
-    }
-
-    /**
      * Cast value to int
      *
      * @param mixed $val in bytes
