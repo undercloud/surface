@@ -106,7 +106,7 @@ class Scope
     /**
      * Get defined constants
      *
-     * @param  boolean $categorize by modules
+     * @param boolean $categorize by modules
      *
      * @return array
      */

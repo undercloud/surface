@@ -17,12 +17,14 @@ class Config
 {
     /**
      * Get all config settings
+     * 
+     * @param string $section name
      *
      * @return array
      */
     public function all()
     {
-        return ini_get_all();
+        return ini_get_all(null, false);
     }
 
     /**
@@ -37,12 +39,14 @@ class Config
     {
         $value = ini_get($key);
         if ($process === 'bool') {
-            return Surface\Utils::toBoolean($value);
+            return Utils::toBoolean($value);
         } else if ($process == 'bytes') {
-            return Surface\Utils::toBytes($value);
+            return Utils::toBytes($value);
         } else if ($process instanceof Closure) {
             return call_user_func($process, $value);
         }
+        
+        return $value;
     }
 
     /**
@@ -54,7 +58,7 @@ class Config
      */
     public function from($extension)
     {
-        return ini_get_all($extension);
+        return ini_get_all($extension, false);
     }
 
     /**
@@ -158,6 +162,6 @@ class Config
      */
     public function included()
     {
-        return array_filter(explode(',', (string)php_ini_scanned_files()));
+        return array_filter(explode(',' . PHP_EOL, trim((string)php_ini_scanned_files())));
     }
 }

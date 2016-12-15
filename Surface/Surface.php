@@ -1,6 +1,5 @@
 <?php
 namespace Surface;
-
 /**
  * Module manager
  *
@@ -9,25 +8,56 @@ namespace Surface;
  * @author   undercloud <lodashes@gmail.com>
  * @license  https://opensource.org/licenses/MIT MIT
  * @link     http://github.com/undercloud/surface
- *
- * @method Surface\Config     config()
- * @method Surface\Connection connection()
- * @method Surface\Memory     memory()
- * @method Surface\Process    process()
- * @method Surface\Scope      scope()
- * @method Surface\Storage    storage()
- * @method Surface\System     system()
- * @method Surface\Time       time()
+ * 
+ * @method Config     config()
+ * @method Connection connection()
+ * @method Memory     memory()
+ * @method Process    process()
+ * @method Scope      scope()
+ * @method Storage    storage()
+ * @method System     system()
+ * @method Time       time()
  */
 class Surface
 {
+	/**
+	 * @var Config
+	 */
     private $config;
+    
+    /**
+     * @var Connection
+     */
     private $connection;
+    
+    /**
+     * @var Memory
+     */
     private $memory;
+    
+    /**
+     * @var Process
+     */
     private $process;
+    
+    /**
+     * @var Scope
+     */
     private $scope;
+    
+    /**
+     * @var Storage
+     */
     private $storage;
+    
+    /**
+     * @var Sustem
+     */
     private $system;
+    
+    /**
+     * @var Time
+     */
     private $time;
 
     /**
@@ -43,15 +73,15 @@ class Surface
             $class = 'Surface\\' . ucfirst($module);
             $this->{$module} = new $class($this);
         }
-
+        
         return $this->{$module};
     }
 
     /**
      * Module access
      *
-     * @param string $method [description]
-     * @param array  $args   [description]
+     * @param string $method module
+     * @param array  $args   list
      *
      * @throws Surface\SurfaceException
      *
