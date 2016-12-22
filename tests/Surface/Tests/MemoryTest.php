@@ -10,10 +10,10 @@ class MemoryTest extends PHPUnit_Framework_TestCase
     {
         $memory = (new Surface)->memory();
 
-        $used     = $memory->used();
-        $realUsed = $memory->used(true);
-        $peak     = $memory->peak();
-        $realPeak = $memory->peak(true);
+        $used     = $memory->used(false, true);
+        $realUsed = $memory->used(true, true);
+        $peak     = $memory->peak(false, true);
+        $realPeak = $memory->peak(true, true);
 
         $this->assertGreaterThan(0, $used);
         $this->assertGreaterThan(0, $realUsed);

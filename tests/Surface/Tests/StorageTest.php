@@ -15,8 +15,8 @@ class StorageTest extends PHPUnit_Framework_TestCase
         echo 'StorageTmp: ' . $tmp . PHP_EOL;
 
         if (stristr(PHP_OS, 'Linux')) {
-            $free = $storage->free('/');
-            $total = $storage->total('/');
+            $free = $storage->free('/', true);
+            $total = $storage->total('/', true);
 
             echo 'StorageFree: '  . $free . PHP_EOL;
             echo 'StorageTotal: ' . $total . PHP_EOL;
