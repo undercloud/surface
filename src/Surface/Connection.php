@@ -100,7 +100,7 @@ class Connection
 
     public function isSecure()
     {
-
+        return (isset($_SERVER['HTTPS']) and $_SERVER['HTTPS'] === 'on');
     }
 
     public function port()
