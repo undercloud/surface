@@ -105,17 +105,17 @@ class Connection
 
     public function port()
     {
-        
+        return getenv('SERVER_PORT');
     }
 
-    public function localPort()
+    public function remotePort()
     {
-
+        return getenv('REMOTE_PORT');
     }
 
     public function host()
     {
-
+        return getenv('REMOTE_HOST');
     }
 
     /**
