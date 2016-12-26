@@ -77,6 +77,16 @@ class Surface
         return $this->{$module};
     }
 
+    public function get($key)
+    {
+        
+    }
+    
+    public function set($key, $value)
+    {
+        
+    }
+    
     /**
      * Module access
      *
