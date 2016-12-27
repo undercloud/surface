@@ -3,7 +3,6 @@ namespace Surface;
 /**
  * Connection module
  *
- * @category PHP Environment Manager
  * @package  Surface
  * @author   undercloud <lodashes@gmail.com>
  * @license  https://opensource.org/licenses/MIT MIT
@@ -36,11 +35,21 @@ class Connection
     /**
      * Get connection status
      *
-     * @return int
+     * @return string
      */
     public function getStatus()
     {
-        return connection_status();
+        if ($this->isNormal()) {
+            return 'normal';
+        }
+
+        if ($this->isTimeout()) {
+            return 'timeout';
+        }
+
+        if ($this->isAborted()) {
+            return 'aborted';
+        }
     }
 
     /**
@@ -75,9 +84,9 @@ class Connection
 
     /**
      * Get connection IP
-     * 
+     *
      * @param string $real flag
-     * 
+     *
      * @return string
      */
     public function ip($real = false)
@@ -87,7 +96,7 @@ class Connection
                 'HTTP_CLIENT_IP','HTTP_X_FORWARDED_FOR','HTTP_X_FORWARDED',
                 'HTTP_FORWARDED_FOR','HTTP_FORWARDED','REMOTE_ADDR'
             ];
-            
+
             foreach ($keys as $key) {
                 if($ip = getenv($key)) {
                     return $ip;
@@ -98,21 +107,41 @@ class Connection
         }
     }
 
+    /**
+     *  Check if connection is secure
+     *
+     * @return boolean
+     */
     public function isSecure()
     {
         return (isset($_SERVER['HTTPS']) and $_SERVER['HTTPS'] === 'on');
     }
 
+    /**
+     *  Get connection port
+     *
+     * @return int
+     */
     public function port()
     {
-        return getenv('SERVER_PORT');
+        return (int) getenv('SERVER_PORT');
     }
 
+    /**
+     *  Get connection remote port
+     *
+     * @return int
+     */
     public function remotePort()
     {
-        return getenv('REMOTE_PORT');
+        return (int) getenv('REMOTE_PORT');
     }
 
+    /**
+     *  Get connection remote host
+     *
+     * @return string
+     */
     public function host()
     {
         return getenv('REMOTE_HOST');
@@ -125,6 +154,25 @@ class Connection
      */
     public function dump()
     {
+        $status = $this->getStatus();
+        $ignoreAbort = $this->isAbortIgnored() ? 'true' : 'false';
+        $ip = $this->ip();
+        $realIp = $this->ip(true);
+        $secure = $this->isSecure() ? 'true' : 'false';
+        $port = $this->port();
+        $remotePort = $this->remotePort();
+        $host = $this->host();
 
+        return (
+            "└── Connection
+                ├── Status: {$status}
+                ├── Ignore Abort: {$ignoreAbort}
+                ├── IP: {$ip}
+                ├── Real IP: {$realIp}
+                ├── Port: {$port}
+                ├── Remote Port: {$remotePort}
+                ├── Host: {$host}
+                └── Secure: {$secure}"
+        );
     }
 }

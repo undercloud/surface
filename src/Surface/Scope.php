@@ -3,7 +3,6 @@ namespace Surface;
 /**
  * Scope module
  *
- * @category PHP Environment Manager
  * @package  Surface
  * @author   undercloud <lodashes@gmail.com>
  * @license  https://opensource.org/licenses/MIT MIT
@@ -234,6 +233,23 @@ class Scope
      */
     public function dump()
     {
+        $extensions = '[' . implode(', ', $this->extensions()) . ']';
+        $classes = count($this->classes());
+        $interfaces = count($this->interfaces());
+        $traits = count($this->traits());
+        $functions = count($this->functions());
+        $constants = count($this->constants());
+        $included = count($this->included());
 
+        return (
+            "└── Scope
+                 ├── Extensions: {$extensions}
+                 ├── Classes: {$classes}
+                 ├── Interfaces: {$interfaces}
+                 ├── Traits: {$traits}
+                 ├── Functions: {$functions}
+                 ├── Constants: {$constants}
+                 └── Included: {$included}"
+        );
     }
 }

@@ -3,7 +3,6 @@ namespace Surface;
 /**
  * Config module
  *
- * @category PHP Environment Manager
  * @package  Surface
  * @author   undercloud <lodashes@gmail.com>
  * @license  https://opensource.org/licenses/MIT MIT
@@ -169,6 +168,13 @@ class Config
      */
     public function dump()
     {
+        $source = $this->source();
+        $included = '[' . implode(', ', $this->included()) . ']';
 
+        return (
+            "└── Config" .
+                "├── Source: {$source}" .
+                "└── Included: {$included}"
+        );
     }
 }

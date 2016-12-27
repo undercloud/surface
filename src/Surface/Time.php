@@ -3,7 +3,6 @@ namespace Surface;
 /**
  * Time module
  *
- * @category PHP Environment Manager
  * @package  Surface
  * @author   undercloud <lodashes@gmail.com>
  * @license  https://opensource.org/licenses/MIT MIT
@@ -19,7 +18,7 @@ class Time
      * Get or set timezone name
      *
      * @param string $name timezone
-     * 
+     *
      * @throws SurfaceException
      *
      * @return null|string

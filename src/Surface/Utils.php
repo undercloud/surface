@@ -3,7 +3,6 @@ namespace Surface;
 /**
  * Helper
  *
- * @category PHP Environment Manager
  * @package  Surface
  * @author   undercloud <lodashes@gmail.com>
  * @license  https://opensource.org/licenses/MIT MIT
@@ -67,7 +66,7 @@ class Utils
             $val *= 1024;
         }
 
-        return (int) $val;
+        return $val;
     }
 
     /**

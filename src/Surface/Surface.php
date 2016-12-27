@@ -3,7 +3,6 @@ namespace Surface;
 /**
  * Module manager
  *
- * @category PHP Environment Manager
  * @package  Surface
  * @author   undercloud <lodashes@gmail.com>
  * @license  https://opensource.org/licenses/MIT MIT
@@ -51,7 +50,7 @@ class Surface
     private $storage;
 
     /**
-     * @var Sustem
+     * @var System
      */
     private $system;
 
@@ -77,16 +76,35 @@ class Surface
         return $this->{$module};
     }
 
+    /**
+     * Get env variable
+     *
+     * @param string $key name
+     *
+     * @return mixed
+     */
     public function get($key)
     {
-        
+        return getenv($key);
     }
-    
+
+    /**
+     * Set env variable
+     *
+     * @param string $key   key
+     * @param mixed  $value value
+     *
+     * @throws SurfaceException
+     */
     public function set($key, $value)
     {
-        
+        if (!putenv($key .'=' . $value)) {
+            throw SurfaceException(
+                sprintf('Cannot set value %s for %s', $value, $key)
+            );
+        }
     }
-    
+
     /**
      * Module access
      *
@@ -99,8 +117,7 @@ class Surface
      */
     public function __call($method, $args)
     {
-        $modules = get_object_vars($this);
-
+        $modules = array_keys(get_object_vars($this));
         if (in_array($method, $modules)) {
             return $this->load($method);
         } else {
@@ -110,25 +127,25 @@ class Surface
             ));
         }
     }
-    
+
     /**
      * Dump modules info
-     * 
+     *
      * @param array $modules list
-     * 
+     *
      * @return string
      */
     public function dump(array $modules = null)
     {
         if (null === $modules) {
-            $modules = get_object_vars($this);
+            $modules = array_keys(get_object_vars($this));
         }
 
-        $echo = '';
+        $echo = [];
         foreach ($modules as $module) {
-            $echo .= $this->{$module}->dump();
+            $echo []= $this->load($module)->dump();
         }
 
-        return $echo;
+        return implode(PHP_EOL, $echo);
     }
 }

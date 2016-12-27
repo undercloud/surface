@@ -3,7 +3,6 @@ namespace Surface;
 /**
  * Process module
  *
- * @category PHP Environment Manager
  * @package  Surface
  * @author   undercloud <lodashes@gmail.com>
  * @license  https://opensource.org/licenses/MIT MIT
@@ -151,8 +150,8 @@ class Process
         $pid = $this->pid();
         $inode = $this->inode();
         $timeout = $this->timeout();
-        $uptime = $thi->uptime();
-        
+        $uptime = $this->uptime();
+
         return (
             "└── Process
                 ├── User: {$user}

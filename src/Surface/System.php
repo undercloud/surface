@@ -3,7 +3,6 @@ namespace Surface;
 /**
  * System module
  *
- * @category PHP Environment Manager
  * @package  Surface
  * @author   undercloud <lodashes@gmail.com>
  * @license  https://opensource.org/licenses/MIT MIT
@@ -125,7 +124,7 @@ class System
      */
     public function ip()
     {
-        return getenv(['SERVER_ADDR']);
+        return getenv('SERVER_ADDR');
     }
 
     /**
@@ -206,7 +205,7 @@ class System
      *
      * @param string $msg      log message
      * @param int    $priority log level
-     * 
+     *
      * @throws SurfaceException
      *
      * @return null
@@ -227,6 +226,7 @@ class System
      */
     public function dump()
     {
+        $version = $this->version();
         $sapi = $this->sapi();
         $arch = $this->arch();
         $software = $this->software();
@@ -242,6 +242,7 @@ class System
 
         return (
             "└── System
+                 ├── Verison: {$version}
                  ├── SAPI: {$sapi}
                  ├── Arch: {$arch}
                  ├── Software: {$software}
@@ -251,7 +252,7 @@ class System
                  ├── Load(%): {$load}
                  ├── Is CLI: {$cli}
                  ├── Is HTTP: {$http}
-                 ├── Gateway: {$gate}
+                 ├── Gateway: {$gateway}
                  ├── OS: {$os}
                  └── Protocol: {$protocol}"
         );

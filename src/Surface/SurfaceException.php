@@ -3,7 +3,6 @@ namespace Surface;
 /**
  * Exception
  *
- * @category PHP Environment Manager
  * @package  Surface
  * @author   undercloud <lodashes@gmail.com>
  * @license  https://opensource.org/licenses/MIT MIT

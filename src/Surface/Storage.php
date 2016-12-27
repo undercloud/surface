@@ -3,7 +3,6 @@ namespace Surface;
 /**
  * Storage module
  *
- * @category PHP Environment Manager
  * @package  Surface
  * @author   undercloud <lodashes@gmail.com>
  * @license  https://opensource.org/licenses/MIT MIT
@@ -58,11 +57,15 @@ class Storage
      */
     public function dump()
     {
-        $root = end(explode(DIRECTORY_SEPARATOR, __DIR__));
+        $root = reset(explode(DIRECTORY_SEPARATOR, __DIR__));
+        if (!$root) {
+            $root = '/';
+        }
+
         $total = $this->total($root, true);
         $free = $this->free($root, true);
         $tmp = $this->tmp();
-        
+
         return (
             "└── Storage
                 ├── Total: {$total}
