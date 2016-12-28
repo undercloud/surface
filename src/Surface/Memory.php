@@ -83,12 +83,12 @@ class Memory
         $limit = $this->root->config()->get('memory_limit');
 
         return (
-            "└── Memory
-                 ├── Used: {$used}
-                 ├── Used(real): {$usedReal}
-                 ├── Peak: {$peak}
-                 ├── Peak(real): {$peakReal}
-                 └── Limit: {$limit}"
+            "├── Memory
+             │  ├── Used: {$used}
+             │  ├── Used(real): {$usedReal}
+             │  ├── Peak: {$peak}
+             │  ├── Peak(real): {$peakReal}
+             │  └── Limit: {$limit}"
         );
     }
 }

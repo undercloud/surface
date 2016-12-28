@@ -172,9 +172,9 @@ class Config
         $included = '[' . implode(', ', $this->included()) . ']';
 
         return (
-            "└── Config" .
-                "├── Source: {$source}" .
-                "└── Included: {$included}"
+            "├── Config
+             │  ├── Source: {$source}
+             │  └── Included: {$included}"
         );
     }
 }

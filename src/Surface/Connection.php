@@ -164,15 +164,15 @@ class Connection
         $host = $this->host();
 
         return (
-            "└── Connection
-                ├── Status: {$status}
-                ├── Ignore Abort: {$ignoreAbort}
-                ├── IP: {$ip}
-                ├── Real IP: {$realIp}
-                ├── Port: {$port}
-                ├── Remote Port: {$remotePort}
-                ├── Host: {$host}
-                └── Secure: {$secure}"
+            "├── Connection
+             │  ├── Status: {$status}
+             │  ├── Ignore Abort: {$ignoreAbort}
+             │  ├── IP: {$ip}
+             │  ├── Real IP: {$realIp}
+             │  ├── Port: {$port}
+             │  ├── Remote Port: {$remotePort}
+             │  ├── Host: {$host}
+             │  └── Secure: {$secure}"
         );
     }
 }

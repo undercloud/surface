@@ -9,17 +9,5 @@ class StorageTest extends PHPUnit_Framework_TestCase
     public function testStorageStack()
     {
         $storage = (new Surface)->storage();
-
-        $tmp = $storage->tmp();
-
-        echo 'StorageTmp: ' . $tmp . PHP_EOL;
-
-        if (stristr(PHP_OS, 'Linux')) {
-            $free = $storage->free('/', true);
-            $total = $storage->total('/', true);
-
-            echo 'StorageFree: '  . $free . PHP_EOL;
-            echo 'StorageTotal: ' . $total . PHP_EOL;
-        }
     }
 }

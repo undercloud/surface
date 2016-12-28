@@ -242,14 +242,14 @@ class Scope
         $included = count($this->included());
 
         return (
-            "└── Scope
-                 ├── Extensions: {$extensions}
-                 ├── Classes: {$classes}
-                 ├── Interfaces: {$interfaces}
-                 ├── Traits: {$traits}
-                 ├── Functions: {$functions}
-                 ├── Constants: {$constants}
-                 └── Included: {$included}"
+            "├── Scope
+             │  ├── Extensions: {$extensions}
+             │  ├── Classes: {$classes}
+             │  ├── Interfaces: {$interfaces}
+             │  ├── Traits: {$traits}
+             │  ├── Functions: {$functions}
+             │  ├── Constants: {$constants}
+             │  └── Included: {$included}"
         );
     }
 }

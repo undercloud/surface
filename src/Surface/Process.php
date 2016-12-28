@@ -153,14 +153,14 @@ class Process
         $uptime = $this->uptime();
 
         return (
-            "└── Process
-                ├── User: {$user}
-                ├── UID: {$uid}
-                ├── GID: {$gid}
-                ├── PID: {$pid}
-                ├── Inode: {$inode}
-                ├── Timeout(s): {$timeout}
-                └── Uptime(s): {$uptime}"
+            "├── Process
+             │  ├── User: {$user}
+             │  ├── UID: {$uid}
+             │  ├── GID: {$gid}
+             │  ├── PID: {$pid}
+             │  ├── Inode: {$inode}
+             │  ├── Timeout(s): {$timeout}
+             │  └── Uptime(s): {$uptime}"
         );
     }
 }

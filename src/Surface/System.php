@@ -241,20 +241,20 @@ class System
         $protocol = $this->protocol();
 
         return (
-            "└── System
-                 ├── Verison: {$version}
-                 ├── SAPI: {$sapi}
-                 ├── Arch: {$arch}
-                 ├── Software: {$software}
-                 ├── Host: {$host}
-                 ├── Port: {$port}
-                 ├── IP: {$ip}
-                 ├── Load(%): {$load}
-                 ├── Is CLI: {$cli}
-                 ├── Is HTTP: {$http}
-                 ├── Gateway: {$gateway}
-                 ├── OS: {$os}
-                 └── Protocol: {$protocol}"
+            "├── System
+             │  ├── Verison: {$version}
+             │  ├── SAPI: {$sapi}
+             │  ├── Arch: {$arch}
+             │  ├── Software: {$software}
+             │  ├── Host: {$host}
+             │  ├── Port: {$port}
+             │  ├── IP: {$ip}
+             │  ├── Load(%): {$load}
+             │  ├── Is CLI: {$cli}
+             │  ├── Is HTTP: {$http}
+             │  ├── Gateway: {$gateway}
+             │  ├── OS: {$os}
+             │  └── Protocol: {$protocol}"
         );
     }
 }

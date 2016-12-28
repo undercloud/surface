@@ -20,11 +20,6 @@ class MemoryTest extends PHPUnit_Framework_TestCase
         $this->assertGreaterThan(0, $peak);
         $this->assertGreaterThan(0, $realPeak);
 
-        echo 'MemoryUsed: '     . $used     . PHP_EOL;
-        echo 'MemoryRealUsed: ' . $realUsed . PHP_EOL;
-        echo 'MemoryPeak: '     . $peak     . PHP_EOL;
-        echo 'MemoryRealPeak: ' . $realPeak . PHP_EOL;
-
         $memory->limit('10M');
     }
 }

@@ -82,8 +82,8 @@ class Time
 
         return (
             "└── Time
-                 ├── Zone: {$zone}
-                 └── Offset: {$offset}"
+                ├── Zone: {$zone}
+                └── Offset: {$offset}"
         );
     }
 }

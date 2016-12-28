@@ -67,10 +67,10 @@ class Storage
         $tmp = $this->tmp();
 
         return (
-            "└── Storage
-                ├── Total: {$total}
-                ├── Free: {$free}
-                └── Tmp: {$tmp}"
+            "├── Storage
+             │  ├── Total: {$total}
+             │  ├── Free: {$free}
+             │  └── Tmp: {$tmp}"
         );
     }
 }

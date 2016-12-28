@@ -143,9 +143,13 @@ class Surface
 
         $echo = [];
         foreach ($modules as $module) {
-            $echo []= $this->load($module)->dump();
+            $echo []= str_replace(
+                str_repeat(' ', 13),
+                '',
+                $this->load($module)->dump()
+            );
         }
 
-        return implode(PHP_EOL, $echo);
+        return PHP_EOL . '/' . PHP_EOL . implode(PHP_EOL, $echo);
     }
 }
