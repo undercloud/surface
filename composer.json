@@ -1,0 +1,25 @@
+{
+  "name": "undercloud/surface",
+  "description": "Surface - PHP Environment Manager",
+  "keywords": [
+    "php","surface","system",
+    "manager","memory","config",
+    "env","environment","settings"
+  ],
+  "homepage": "https://github.com/undercloud/surface",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "undercloud",
+      "email": "lodashes@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0"
+  },
+   "autoload": {
+      "psr-4": {
+         "Surface\\": "src/Surface/"
+      }
+   }
+}
