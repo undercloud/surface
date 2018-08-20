@@ -20,8 +20,25 @@ class SurfaceException extends Exception
      * @param code           $code     error code
      * @param Exception|null $previous exception
      */
-    public function __construct($message = null, $code = 0, Exception $previous = null)
+    public function __construct($message = null)
     {
-        parent::__construct($message, $code, $previous);
+        if (func_num_args() > 1) {
+            $params = array_slice(func_get_args(), 1);
+
+            $params = array_map(function($item){
+                if (is_array($item)) {
+                    $item = implode(', ', $item);
+                }
+
+                return $item;
+            }, $params);
+
+            $message = vsprintf(
+                $message,
+                $params
+            );
+        }
+
+        parent::__construct($message);
     }
 }

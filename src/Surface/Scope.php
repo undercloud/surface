@@ -11,6 +11,53 @@ namespace Surface;
 class Scope
 {
     /**
+     * Get PHP version
+     *
+     * @param string $extension module
+     *
+     * @return string
+     */
+    public function version($extension = null)
+    {
+        return (
+            $extension
+            ? phpversion($extension)
+            : (
+                PHP_MAJOR_VERSION . '.' .
+                PHP_MINOR_VERSION . '.' .
+                PHP_RELEASE_VERSION
+            )
+        );
+    }
+
+    /**
+     * Compare PHP version
+     *
+     * @param string $version  value
+     * @param string $operator compare
+     *
+     * @return boolean
+     */
+    public function is($version)
+    {
+        $regex = '~([<>=!])?(\d{1,2}(\.\d{1,2}(\.\d{1,2})?)?)~';
+        if (preg_match($regex, $version, $match)) {
+            if (!isset($match[3])) $match[2] .= '.0';
+            if (!isset($match[4])) $match[2] .= '.0';
+
+            list($op, $version) = array_slice($match, 1);
+
+            if (!$op) {
+                $op = '=';
+            }
+
+            return (bool) version_compare($this->version(), $version, $op);
+        }
+
+        return false;
+    }
+
+    /**
      * Get declared classes
      *
      * @return array
@@ -199,7 +246,12 @@ class Scope
      */
     public function setIncludePath(array $paths)
     {
-        set_include_path(implode(PATH_SEPARATOR, $paths));
+        if(false === set_include_path(implode(PATH_SEPARATOR, $paths))){
+            throw new SurfaceException(
+                'Cannot set include path for %s',
+                implode(',', $paths)
+            );
+        }
     }
 
     /**
@@ -233,23 +285,25 @@ class Scope
      */
     public function dump()
     {
+        $version    = $this->version();
         $extensions = '[' . implode(', ', $this->extensions()) . ']';
-        $classes = count($this->classes());
+        $classes    = count($this->classes());
         $interfaces = count($this->interfaces());
-        $traits = count($this->traits());
-        $functions = count($this->functions());
-        $constants = count($this->constants());
-        $included = count($this->included());
+        $traits     = count($this->traits());
+        $functions  = count($this->functions());
+        $constants  = count($this->constants());
+        $included   = count($this->included());
 
         return (
             "├── Scope
+             │  ├── Verison:    {$version}
              │  ├── Extensions: {$extensions}
-             │  ├── Classes: {$classes}
+             │  ├── Classes:    {$classes}
              │  ├── Interfaces: {$interfaces}
-             │  ├── Traits: {$traits}
-             │  ├── Functions: {$functions}
-             │  ├── Constants: {$constants}
-             │  └── Included: {$included}"
+             │  ├── Traits:     {$traits}
+             │  ├── Functions:  {$functions}
+             │  ├── Constants:  {$constants}
+             │  └── Included:   {$included}"
         );
     }
 }

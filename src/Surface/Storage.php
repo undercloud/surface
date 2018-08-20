@@ -35,7 +35,7 @@ class Storage
      */
     public function total($root, $humanize = false)
     {
-        $space =  disk_total_space($root);
+        $space = disk_total_space($root);
 
         return $humanize ? Utils::roundBytes($space) : $space;
     }
@@ -57,20 +57,20 @@ class Storage
      */
     public function dump()
     {
-        $root = reset(explode(DIRECTORY_SEPARATOR, __DIR__));
+        $root = explode(DIRECTORY_SEPARATOR, __DIR__)[0];
         if (!$root) {
             $root = '/';
         }
 
         $total = $this->total($root, true);
-        $free = $this->free($root, true);
-        $tmp = $this->tmp();
+        $free  = $this->free($root, true);
+        $tmp   = $this->tmp();
 
         return (
             "├── Storage
-             │  ├── Total: {$total}
-             │  ├── Free: {$free}
-             │  └── Tmp: {$tmp}"
+             │  ├── Total:  {$total}
+             │  ├── Free:   {$free}
+             │  └── Tmp:    {$tmp}"
         );
     }
 }

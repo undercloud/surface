@@ -154,25 +154,25 @@ class Connection
      */
     public function dump()
     {
-        $status = $this->getStatus();
+        $status      = $this->getStatus();
         $ignoreAbort = $this->isAbortIgnored() ? 'true' : 'false';
-        $ip = $this->ip();
-        $realIp = $this->ip(true);
-        $secure = $this->isSecure() ? 'true' : 'false';
-        $port = $this->port();
-        $remotePort = $this->remotePort();
-        $host = $this->host();
+        $ip          = $this->ip();
+        $realIp      = $this->ip(true);
+        $secure      = $this->isSecure() ? 'true' : 'false';
+        $port        = $this->port();
+        $remotePort  = $this->remotePort();
+        $host        = $this->host();
 
         return (
             "├── Connection
-             │  ├── Status: {$status}
-             │  ├── Ignore Abort: {$ignoreAbort}
-             │  ├── IP: {$ip}
-             │  ├── Real IP: {$realIp}
-             │  ├── Port: {$port}
-             │  ├── Remote Port: {$remotePort}
-             │  ├── Host: {$host}
-             │  └── Secure: {$secure}"
+             │  ├── Status:         {$status}
+             │  ├── Ignore Abort:   {$ignoreAbort}
+             │  ├── IP:             {$ip}
+             │  ├── Real IP:        {$realIp}
+             │  ├── Port:           {$port}
+             │  ├── Remote Port:    {$remotePort}
+             │  ├── Host:           {$host}
+             │  └── Secure:         {$secure}"
         );
     }
 }

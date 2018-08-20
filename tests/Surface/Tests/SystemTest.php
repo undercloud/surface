@@ -12,7 +12,6 @@ class SystemTest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue($sys->isCli());
         $this->assertFalse($sys->isHttp());
-        $this->assertTrue($sys->is('>=5.5.9'));
 
         $sys->log('Well Done!');
     }

@@ -62,11 +62,15 @@ class Memory
      *
      * @param string $value limit
      *
-     * @return null
+     * @return mixed
      */
     public function limit($value = null)
     {
-        return $this->root->config()->set('memory_limit', $value);
+        if (0 == func_num_args()) {
+            return $this->root->config()->get('memory_limit','bytes');
+        } else {
+            return $this->root->config()->set('memory_limit', $value);
+        }
     }
 
     /**
@@ -76,19 +80,19 @@ class Memory
      */
     public function dump()
     {
-        $used = $this->used(false, true);
+        $used     = $this->used(false, true);
         $usedReal = $this->used(true, true);
-        $peak = $this->peak(false, true);
+        $peak     = $this->peak(false, true);
         $peakReal = $this->peak(true, true);
-        $limit = $this->root->config()->get('memory_limit');
+        $limit    = $this->limit();
 
         return (
             "├── Memory
-             │  ├── Used: {$used}
+             │  ├── Used:       {$used}
              │  ├── Used(real): {$usedReal}
-             │  ├── Peak: {$peak}
+             │  ├── Peak:       {$peak}
              │  ├── Peak(real): {$peakReal}
-             │  └── Limit: {$limit}"
+             │  └── Limit:      {$limit}"
         );
     }
 }

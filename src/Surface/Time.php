@@ -25,14 +25,14 @@ class Time
      */
     public function zone($name = null)
     {
-        if ($name) {
+        if (0 == func_num_args()) {
+            return date_default_timezone_get();
+        } else {
             if (false === @date_default_timezone_set($name)) {
                 throw new SurfaceException(
                     error_get_last()['message']
                 );
             }
-        } else {
-            return date_default_timezone_get();
         }
     }
 
@@ -53,11 +53,13 @@ class Time
      *  Get timezone name from offset
      *
      * @param string|int $offset integer or human +/-00:00 format
-     * @param int        $isdst  daylight saving time indicator
+     * @param bool       $isdst  daylight saving time indicator
+     *
+     * @throws SurfaceException
      *
      * @return string
      */
-    public function from($offset, $isdst = 0)
+    public function from($offset, $isdst = false)
     {
         if (preg_match('~([\+\-])?(\d\d):(\d\d)~', $offset, $match)) {
             $offset = (3600 * (int) $match[2]) + (60 * (int) $match[3]);
@@ -65,9 +67,22 @@ class Time
             if ('-' === $match[1]) {
                 $offset *= -1;
             }
+        } else if (!is_numeric($offset)) {
+            throw new SurfaceException(
+                'Invalid timezone offset %s',
+                $offset
+            );
         }
 
-        return timezone_name_from_abbr('', $offset, $isdst);
+        foreach (timezone_abbreviations_list() as $abbr) {
+            foreach ($abbr as $city) {
+                if ($city['offset'] == $offset and $city['dst'] === $isdst) {
+                    return $city['timezone_id'];
+                }
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -77,12 +92,12 @@ class Time
      */
     public function dump()
     {
-        $zone = $this->zone();
+        $zone   = $this->zone();
         $offset = $this->offset();
 
         return (
             "└── Time
-                ├── Zone: {$zone}
+                ├── Zone:   {$zone}
                 └── Offset: {$offset}"
         );
     }

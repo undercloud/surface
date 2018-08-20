@@ -30,6 +30,11 @@ class Utils
         }
     }
 
+    public static function toNumeric($val)
+    {
+        return self::toBytes($val, 1000);
+    }
+
     /**
      * Cast value to int
      *
@@ -37,33 +42,31 @@ class Utils
      *
      * @return int
      */
-    public static function toBytes($val)
+    public static function toBytes($val, $base = 1024)
     {
-        if (empty($val)) {
-            return 0;
-        }
+        if (preg_match('~([0-9]+)[\s]*([a-z]+)~i', $val, $matches)) {
+            $last = '';
+            if (isset($matches[2])) {
+                $last = $matches[2];
+            }
 
-        preg_match('#([0-9]+)[\s]*([a-z]+)#i', $val, $matches);
+            if (isset($matches[1])) {
+                $val = (int) $matches[1];
+            }
 
-        $last = '';
-        if (isset($matches[2])) {
-            $last = $matches[2];
-        }
-
-        if (isset($matches[1])) {
-            $val = (int) $matches[1];
-        }
-
-        switch (strtolower($last)) {
-        case 'g':
-        case 'gb':
-            $val *= 1024;
-        case 'm':
-        case 'mb':
-            $val *= 1024;
-        case 'k':
-        case 'kb':
-            $val *= 1024;
+            switch (strtolower($last)) {
+            case 'g':
+            case 'gb':
+                $val *= $base;
+            case 'm':
+            case 'mb':
+                $val *= $base;
+            case 'k':
+            case 'kb':
+                $val *= $base;
+            }
+        } else {
+            $val = 0;
         }
 
         return $val;
@@ -78,13 +81,15 @@ class Utils
      */
     public static function toBoolean($val)
     {
-        static $map = [
+        $val = strtolower($val);
+
+        $map = [
             'on'    => true,
             'true'  => true,
             'off'   => false,
             'false' => false
         ];
 
-        return @($map[strtolower($val)] ?: (bool)$val);
+        return (isset($map[$val]) ? $map[$val] : (bool) $val);
     }
 }

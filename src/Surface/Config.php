@@ -36,6 +36,8 @@ class Config
         $value = ini_get($key);
         if ('bool' === $process) {
             return Utils::toBoolean($value);
+        } else if ('numeric' === $process){
+            return Utils::toNumeric($value);
         } else if ('bytes' === $process) {
             return Utils::toBytes($value);
         } else if ($process instanceof Closure) {
@@ -65,15 +67,18 @@ class Config
      *
      * @throws Surface\SurfaceException
      *
-     * @return null
+     * @return mixed - old ini value
      */
     public function set($key, $value)
     {
-        if (false === ini_set($key, $value)) {
+        if (false === ($oldvalue = ini_set($key, $value))) {
             throw new SurfaceException(
-                'Cannot set config for ' . $key
+                'Cannot set config for %s',
+                $key
             );
         }
+
+        return $oldvalue;
     }
 
     /**
@@ -168,12 +173,12 @@ class Config
      */
     public function dump()
     {
-        $source = $this->source();
+        $source   = $this->source();
         $included = '[' . implode(', ', $this->included()) . ']';
 
         return (
             "├── Config
-             │  ├── Source: {$source}
+             │  ├── Source:   {$source}
              │  └── Included: {$included}"
         );
     }

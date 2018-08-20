@@ -6,6 +6,13 @@ use PHPUnit_Framework_TestCase;
 
 class ScopeTest extends PHPUnit_Framework_TestCase
 {
+    public function testVersion()
+    {
+        $scope = (new Surface)->scope();
+
+        $this->assertTrue($scope->is('>=5.5.0'));
+    }
+
     public function testClassStack()
     {
         $scope = (new Surface)->scope();

@@ -82,18 +82,14 @@ class Process
      *
      * @throws Surface\SurfaceException
      *
-     * @return null
+     * @return mixed
      */
     public function timeout($sec = null)
     {
-        if (null === $sec) {
+        if (0 == func_num_args()) {
             return $this->root->config()->get('max_execution_time');
-        }
-
-        if (false === set_time_limit($sec)) {
-            throw new SurfaceException(
-                'Cannot set timeout'
-            );
+        } else {
+            return $this->root->config()->set('max_execution_time', $sec);
         }
     }
 
@@ -118,7 +114,7 @@ class Process
      */
     public function started($format = null)
     {
-        $ts = $_SERVER['REQUEST_TIME_FLOAT'];
+        $ts = (int) $_SERVER['REQUEST_TIME_FLOAT'];
 
         if ($format) {
             return date($format, $ts);
@@ -144,23 +140,23 @@ class Process
      */
     public function dump()
     {
-        $user = $this->user();
-        $uid = $this->uid();
-        $gid = $this->gid();
-        $pid = $this->pid();
-        $inode = $this->inode();
+        $user    = $this->user();
+        $uid     = $this->uid();
+        $gid     = $this->gid();
+        $pid     = $this->pid();
+        $inode   = $this->inode();
         $timeout = $this->timeout();
-        $uptime = $this->uptime();
+        $uptime  = $this->uptime();
 
         return (
             "├── Process
-             │  ├── User: {$user}
-             │  ├── UID: {$uid}
-             │  ├── GID: {$gid}
-             │  ├── PID: {$pid}
-             │  ├── Inode: {$inode}
+             │  ├── User:       {$user}
+             │  ├── UID:        {$uid}
+             │  ├── GID:        {$gid}
+             │  ├── PID:        {$pid}
+             │  ├── Inode:      {$inode}
              │  ├── Timeout(s): {$timeout}
-             │  └── Uptime(s): {$uptime}"
+             │  └── Uptime(s):  {$uptime}"
         );
     }
 }

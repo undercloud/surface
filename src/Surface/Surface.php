@@ -99,8 +99,10 @@ class Surface
     public function set($key, $value)
     {
         if (!putenv($key .'=' . $value)) {
-            throw SurfaceException(
-                sprintf('Cannot set value %s for %s', $value, $key)
+            throw new SurfaceException(
+                'Cannot set value %s for %s',
+                $value,
+                $key
             );
         }
     }
@@ -121,10 +123,10 @@ class Surface
         if (in_array($method, $modules)) {
             return $this->load($method);
         } else {
-            throw new SurfaceException(sprintf(
+            throw new SurfaceException(
                 'Module %s does not exists',
                 $method
-            ));
+            );
         }
     }
 
@@ -150,6 +152,6 @@ class Surface
             );
         }
 
-        return PHP_EOL . '/' . PHP_EOL . implode(PHP_EOL, $echo);
+        return PHP_EOL . '/' . PHP_EOL . implode(PHP_EOL, $echo) . PHP_EOL;
     }
 }

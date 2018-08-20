@@ -71,53 +71,6 @@ class System
     }
 
     /**
-     * Get PHP version
-     *
-     * @param string $extension module
-     *
-     * @return string
-     */
-    public function version($extension = null)
-    {
-        return (
-            $extension
-            ? phpversion($extension)
-            : (
-                PHP_MAJOR_VERSION . '.' .
-                PHP_MINOR_VERSION . '.' .
-                PHP_RELEASE_VERSION
-            )
-        );
-    }
-
-    /**
-     * Compare PHP version
-     *
-     * @param string $version  value
-     * @param string $operator compare
-     *
-     * @return boolean
-     */
-    public function is($version)
-    {
-        $regex = '~([<>=!])?(\d{1,2}(\.\d{1,2}(\.\d{1,2})?)?)~';
-        if (preg_match($regex, $version, $match)) {
-            if (!isset($match[3])) $match[2] .= '.0';
-            if (!isset($match[4])) $match[2] .= '.0';
-
-            list($op, $version) = array_slice($match, 1);
-
-            if (!$op) {
-                $op = '=';
-            }
-
-            return (bool) version_compare($this->version(), $version, $op);
-        }
-
-        return false;
-    }
-
-    /**
      * Get server ip
      *
      * @return string
@@ -226,35 +179,33 @@ class System
      */
     public function dump()
     {
-        $version = $this->version();
-        $sapi = $this->sapi();
-        $arch = $this->arch();
+        $sapi     = $this->sapi();
+        $arch     = $this->arch();
         $software = $this->software();
-        $host = $this->host();
-        $port = $this->port();
-        $ip = $this->ip();
-        $load = $this->load();
-        $cli = $this->isCli() ? 'true' : 'false';
-        $http = $this->isHttp() ? 'true' : 'false';
-        $gateway = $this->gateway();
-        $os = $this->os();
+        $host     = $this->host();
+        $port     = $this->port();
+        $ip       = $this->ip();
+        $load     = $this->load();
+        $cli      = $this->isCli() ? 'true' : 'false';
+        $http     = $this->isHttp() ? 'true' : 'false';
+        $gateway  = $this->gateway();
+        $os       = $this->os();
         $protocol = $this->protocol();
 
         return (
             "├── System
-             │  ├── Verison: {$version}
-             │  ├── SAPI: {$sapi}
-             │  ├── Arch: {$arch}
-             │  ├── Software: {$software}
-             │  ├── Host: {$host}
-             │  ├── Port: {$port}
-             │  ├── IP: {$ip}
-             │  ├── Load(%): {$load}
-             │  ├── Is CLI: {$cli}
-             │  ├── Is HTTP: {$http}
-             │  ├── Gateway: {$gateway}
-             │  ├── OS: {$os}
-             │  └── Protocol: {$protocol}"
+             │  ├── SAPI:       {$sapi}
+             │  ├── Arch:       {$arch}
+             │  ├── Software:   {$software}
+             │  ├── Host:       {$host}
+             │  ├── Port:       {$port}
+             │  ├── IP:         {$ip}
+             │  ├── Load(%):    {$load}
+             │  ├── Is CLI:     {$cli}
+             │  ├── Is HTTP:    {$http}
+             │  ├── Gateway:    {$gateway}
+             │  ├── OS:         {$os}
+             │  └── Protocol:   {$protocol}"
         );
     }
 }
