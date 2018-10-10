@@ -172,6 +172,16 @@ class System
         }
     }
 
+    public function is32bit()
+    {
+        return PHP_INT_SIZE === 4;
+    }
+    
+    public function is64bit()
+    {
+        return PHP_INT_SIZE === 8;
+    }
+    
     /**
      * Get summary
      *
