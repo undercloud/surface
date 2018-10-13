@@ -15,8 +15,6 @@ class TimeTest extends PHPUnit_Framework_TestCase
         $zone = $time->zone();
         $offset = $time->offset();
 
-        var_dump($time->from('+09:30'));
-
         $this->assertEquals($zone, $default);
         $this->assertEquals($offset, 3600);
     }

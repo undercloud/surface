@@ -10,7 +10,8 @@ class ScopeTest extends PHPUnit_Framework_TestCase
     {
         $scope = (new Surface)->scope();
 
-        $this->assertTrue($scope->is('>=5.5.0'));
+        $this->assertTrue($scope->is('>=5.4'));
+        $this->assertTrue($scope->is('!=5.4'));
     }
 
     public function testClassStack()

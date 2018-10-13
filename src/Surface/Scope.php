@@ -40,7 +40,7 @@ class Scope
      */
     public function is($version)
     {
-        $regex = '~([<>=!])?(\d{1,2}(\.\d{1,2}(\.\d{1,2})?)?)~';
+        $regex = '~([<>=!]+)?(\d{1,2}(\.\d{1,2}(\.\d{1,2})?)?)~';
         if (preg_match($regex, $version, $match)) {
             if (!isset($match[3])) $match[2] .= '.0';
             if (!isset($match[4])) $match[2] .= '.0';

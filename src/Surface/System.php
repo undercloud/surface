@@ -127,30 +127,7 @@ class System
      */
     public function load()
     {
-        $load = 0;
-        if (!function_exists('sys_getloadavg')) {
-            if (stristr(PHP_OS, 'win')) {
-                $wmi = new COM("Winmgmts://");
-                $server = $wmi->execquery(
-                    "SELECT LoadPercentage FROM Win32_Processor"
-                );
-
-                $cpu_num = 0;
-                $load_total = 0;
-
-                foreach ($server as $cpu) {
-                    $cpu_num++;
-                    $load_total += $cpu->loadpercentage;
-                }
-
-                $load = round($load_total / $cpu_num);
-            }
-        } else {
-            $sys_load = sys_getloadavg();
-            $load = $sys_load[0];
-        }
-
-        return (int) $load;
+        return (int) sys_getloadavg()[0];
     }
 
     /**
@@ -172,16 +149,26 @@ class System
         }
     }
 
+    /**
+     * Check if system is 32 bit
+     *
+     * @return boolean
+     */
     public function is32bit()
     {
         return PHP_INT_SIZE === 4;
     }
-    
+
+    /**
+     * Check if system is 64 bit
+     *
+     * @return boolean
+     */
     public function is64bit()
     {
         return PHP_INT_SIZE === 8;
     }
-    
+
     /**
      * Get summary
      *
@@ -201,6 +188,8 @@ class System
         $gateway  = $this->gateway();
         $os       = $this->os();
         $protocol = $this->protocol();
+        $is32bit  = $this->is32bit() ? 'true' : 'false';
+        $is64bit  = $this->is64bit() ? 'true' : 'false';
 
         return (
             "├── System
@@ -215,7 +204,9 @@ class System
              │  ├── Is HTTP:    {$http}
              │  ├── Gateway:    {$gateway}
              │  ├── OS:         {$os}
-             │  └── Protocol:   {$protocol}"
+             │  ├── Protocol:   {$protocol}
+             │  ├── 32 bit:     {$is32bit}
+             │  └── 64 bit:     {$is64bit}"
         );
     }
 }

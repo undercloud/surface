@@ -10,6 +10,7 @@ namespace Surface;
  *
  * @method Config     config()
  * @method Connection connection()
+ * @method Locale     locale()
  * @method Memory     memory()
  * @method Process    process()
  * @method Scope      scope()
@@ -28,6 +29,11 @@ class Surface
      * @var Connection
      */
     private $connection;
+
+    /**
+     * @var Locale
+     */
+    private $locale;
 
     /**
      * @var Memory
