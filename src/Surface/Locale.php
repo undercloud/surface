@@ -42,7 +42,7 @@ class Locale
 
          return (
             "├── Locale
-             │  ├── Current: en_US"
+             │  └── Current: en_US"
         );
     }
 }
