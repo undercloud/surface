@@ -12,15 +12,14 @@ namespace Surface;
 class Memory
 {
     /**
-     * Rool helper
-     * @var Surface\Surface
+     * @var Surface
      */
     private $root;
 
     /**
      * Initialize
      *
-     * @param Surface\Surface $root instance
+     * @param Surface $root instance
      */
     public function __construct(Surface $root)
     {
@@ -58,9 +57,11 @@ class Memory
     }
 
     /**
-     * Limit memory usage
+     * Get or set limit memory usage
      *
      * @param string $value limit
+     *
+     * @throws SurfaceException
      *
      * @return mixed
      */
@@ -75,6 +76,8 @@ class Memory
 
     /**
      * Get summary
+     *
+     * @throws SurfaceException
      *
      * @return string
      */

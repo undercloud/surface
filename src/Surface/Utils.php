@@ -20,7 +20,7 @@ class Utils
     public static function roundBytes($val)
     {
         $precision = 2;
-        $units = array('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
+        $units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
         foreach ($units as $unit) {
             if ($val >= 1024 && $unit != 'YB') {
                 $val = ($val / 1024);
@@ -30,13 +30,20 @@ class Utils
         }
     }
 
+    /**
+     * Casr value to int
+     *
+     * @param mixed $val in numeric
+     *
+     * @return int
+     */
     public static function toNumeric($val)
     {
         return self::toBytes($val, 1000);
     }
 
     /**
-     * Cast value to int
+     * Cast bytes to int
      *
      * @param mixed $val in bytes
      *

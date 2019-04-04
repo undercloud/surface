@@ -34,7 +34,6 @@ class Scope
      * Compare PHP version
      *
      * @param string $version  value
-     * @param string $operator compare
      *
      * @return boolean
      */
@@ -242,7 +241,9 @@ class Scope
      *
      * @param array $paths to dirs
      *
-     * @return null
+     * @throws SurfaceException
+     *
+     * @return void
      */
     public function setIncludePath(array $paths)
     {
@@ -259,7 +260,9 @@ class Scope
      *
      * @param string $path to dir
      *
-     * @return null
+     * @throws SurfaceException
+     *
+     * @return void
      */
     public function addIncludePath($path)
     {
@@ -271,7 +274,7 @@ class Scope
     /**
      * Restore include path
      *
-     * @return null
+     * @return void
      */
     public function restoreIncludePath()
     {
@@ -296,7 +299,7 @@ class Scope
 
         return (
             "├── Scope
-             │  ├── Verison:    {$version}
+             │  ├── Version:    {$version}
              │  ├── Extensions: {$extensions}
              │  ├── Classes:    {$classes}
              │  ├── Interfaces: {$interfaces}

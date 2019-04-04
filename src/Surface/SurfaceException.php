@@ -1,5 +1,8 @@
 <?php
 namespace Surface;
+
+use Exception;
+
 /**
  * Exception
  *
@@ -9,16 +12,12 @@ namespace Surface;
  * @link     http://github.com/undercloud/surface
  */
 
-use Exception;
-
 class SurfaceException extends Exception
 {
     /**
      * Initialize
      *
-     * @param string         $message  error message
-     * @param code           $code     error code
-     * @param Exception|null $previous exception
+     * @param string $message  error message
      */
     public function __construct($message = null)
     {

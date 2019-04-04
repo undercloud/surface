@@ -1,5 +1,10 @@
 <?php
 namespace Surface;
+
+use Exception;
+use DateTime;
+use DateTimeZone;
+
 /**
  * Time module
  *
@@ -8,10 +13,6 @@ namespace Surface;
  * @license  https://opensource.org/licenses/MIT MIT
  * @link     http://github.com/undercloud/surface
  */
-
-use DateTime;
-use DateTimeZone;
-
 class Time
 {
     /**
@@ -38,6 +39,8 @@ class Time
 
     /**
      * Get timezone offset
+     *
+     * @throws Exception
      *
      * @return integer
      */
@@ -87,6 +90,9 @@ class Time
 
     /**
      * Get summary
+     *
+     * @throws SurfaceException
+     * @throws Exception
      *
      * @return string
      */

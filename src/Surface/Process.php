@@ -76,11 +76,11 @@ class Process
     }
 
     /**
-     * Set timeout
+     * Get or set timeout
      *
      * @param int $sec seconds
      *
-     * @throws Surface\SurfaceException
+     * @throws SurfaceException
      *
      * @return mixed
      */
@@ -98,7 +98,7 @@ class Process
      *
      * @param int $msec milliseconds
      *
-     * @return null
+     * @return void
      */
     public function sleep($msec)
     {
@@ -135,6 +135,8 @@ class Process
 
     /**
      * Get summary
+     *
+     * @throws SurfaceException
      *
      * @return string
      */

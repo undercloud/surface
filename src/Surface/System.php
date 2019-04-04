@@ -138,7 +138,7 @@ class System
      *
      * @throws SurfaceException
      *
-     * @return null
+     * @return void
      */
     public function log($msg, $priority = LOG_NOTICE)
     {

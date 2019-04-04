@@ -15,7 +15,7 @@ class Connection
      *
      * @param bool $mode value
      *
-     * @return null
+     * @return void
      */
     public function ignoreAbort($mode)
     {
@@ -23,7 +23,7 @@ class Connection
     }
 
     /**
-     * Check if ignoreAbort is setted to true
+     * Check if ignoreAbort is true
      *
      * @return boolean
      */
@@ -50,6 +50,8 @@ class Connection
         if ($this->isAborted()) {
             return 'aborted';
         }
+
+        return 'unknown';
     }
 
     /**
@@ -85,7 +87,7 @@ class Connection
     /**
      * Get connection IP
      *
-     * @param string $real flag
+     * @param boolean $real flag
      *
      * @return string
      */
@@ -98,13 +100,14 @@ class Connection
             ];
 
             foreach ($keys as $key) {
-                if($ip = getenv($key)) {
+                $ip = getenv($key);
+                if ($ip) {
                     return $ip;
                 }
             }
-        } else {
-            return getenv('REMOTE_ADDR');
         }
+
+        return getenv('REMOTE_ADDR');
     }
 
     /**

@@ -1,5 +1,8 @@
 <?php
 namespace Surface;
+
+use Closure;
+
 /**
  * Config module
  *
@@ -8,8 +11,6 @@ namespace Surface;
  * @license  https://opensource.org/licenses/MIT MIT
  * @link     http://github.com/undercloud/surface
  */
-
-use Closure;
 
 class Config
 {
@@ -65,20 +66,20 @@ class Config
      * @param string $key   name
      * @param mixed  $value setup
      *
-     * @throws Surface\SurfaceException
+     * @throws SurfaceException
      *
      * @return mixed - old ini value
      */
     public function set($key, $value)
     {
-        if (false === ($oldvalue = ini_set($key, $value))) {
+        if (false === ($old = ini_set($key, $value))) {
             throw new SurfaceException(
                 'Cannot set config for %s',
                 $key
             );
         }
 
-        return $oldvalue;
+        return $old;
     }
 
     /**
@@ -86,7 +87,7 @@ class Config
      *
      * @param string $key name
      *
-     * @return null
+     * @return void
      */
     public function restore($key)
     {
@@ -100,7 +101,7 @@ class Config
      * @param boolean $process_sections flag
      * @param int     $scanner_mode     constant
      *
-     * @throws Surface\SurfaceException
+     * @throws SurfaceException
      *
      * @return array
      */
@@ -111,7 +112,7 @@ class Config
                 $process_sections,
                 $scanner_mode))
         ) {
-            throw SurfaceException(
+            throw new SurfaceException(
                 'Cannot parse ini file at %s',
                 $path
             );
@@ -127,7 +128,7 @@ class Config
      * @param boolean $process_sections flag
      * @param int     $scanner_mode     value
      *
-     * @throws Surface\SurfaceException
+     * @throws SurfaceException
      *
      * @return array
      */

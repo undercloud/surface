@@ -17,9 +17,9 @@ class Locale
      * @param string $key   name
      * @param mixed  $value item
      *
-     * @throws Surface\SurfaceException
+     * @throws SurfaceException
      *
-     * @return null
+     * @return void
      */
     public function set($key, $value)
     {
@@ -33,6 +33,8 @@ class Locale
 
     /**
      * Get summary
+     *
+     * @throws SurfaceException
      *
      * @return string
      */
